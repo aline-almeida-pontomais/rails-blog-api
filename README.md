@@ -1,8 +1,11 @@
 # Blog - Rails
-Blog simples utilizando Ruby on Rails, focado somente no Back-end.
+Blog simples utilizando Ruby on Rails, focado somente no Back-end. Utilizando docker
+
+Inclui testes unitários de models, controller(request) e rotas, utilizando rspec e a gem **retest** (instruções para instalação e uso abaixo)
 
 Neste blog é possível escrever, ler, editar e deletar artigos. Também é possível fazer o CRUD de comentários dentro de cada um desses artigos. 
 Foi desenvolvido um sistema de autenticação simples utilizando http_basic_authenticate, que não é o método mais seguro de autenticação, mas utilizei a título de aprendizado.
+Cada artigo e comentário possui 3 status: público, privado e arquivado.
 
 
 ![image](https://user-images.githubusercontent.com/82518612/157721507-49debcdc-6447-4d7d-b4b6-019443386aa4.png)
@@ -22,7 +25,21 @@ Ainda é possível escolher um status do comentário, sendo público, privado ou
 - -> Rails versao 7.0.0 ou superior 
 - -> Bundler versão 2.3.8 ou superior
 - -> Sqlite3 versão 3.31.1 ou superior
+- -> Docker
+
+# **Gem Retest** 
+
+- instalação: 
+
+```docker-compose run api gem install retest```
+
+use ```docker-compose run api retest -h``` para ver todas as opções, como por exemplo a tag --all
+
+```docker-compose run api retest --all``` para rodar todos os testes
 
 
-Para iniciar um servidor web dentro da pasta do projeto: 
-``` bin/rails server ```
+Para iniciar o servidor web dentro da pasta do projeto: 
+
+``` docker-compose up ... ```
+
+``` docker-compose run api ... ```
