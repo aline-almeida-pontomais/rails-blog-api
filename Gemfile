@@ -31,6 +31,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'simplecov', require: false, group: :test
 end
 
 group :development do
