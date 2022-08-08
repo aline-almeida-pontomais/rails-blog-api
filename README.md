@@ -23,7 +23,6 @@ Ainda é possível escolher um status do artigo ou comentário, sendo público, 
 - -> Ruby versão 2.7.0 ou superior 
 - -> Rails versao 7.0.0 ou superior 
 - -> Bundler versão 2.3.8 ou superior
-- -> Sqlite3 versão 3.31.1 ou superior
 - -> Docker
 
 # **Gem Retest** 
