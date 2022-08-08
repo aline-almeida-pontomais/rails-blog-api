@@ -26,13 +26,13 @@ RSpec.describe Article, type: :model do
     expect(article.body.length).to be > 10
   end
 
-  it 'is not valid if body length is lesser than 10' do
-    article = build(:article, body: FFaker::BaconIpsum.word)
-    expect(article.body.length).to_not be > 10
-  end
-
   it 'has the correct status' do
     article = build(:article)
     expect(article.status).to be_in(['public', 'private', 'archived'])
+  end
+
+  it 'tests archived method for the article status' do
+    article = build(:article, status: 'archived')
+    expect(article.archived?).to be true
   end
 end
