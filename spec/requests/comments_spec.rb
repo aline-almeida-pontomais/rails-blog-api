@@ -22,6 +22,28 @@ RSpec.describe "Comments", type: :request do
     end
   end
 
+  describe "GET /comments/comment" do
+    before(:each) do
+      all_comments_url = "/articles/#{@article_id}/comments"
+
+      comment = build(:comment)
+      comment_attributes = FactoryBot.attributes_for(:comment)
+
+      post all_comments_url, params: {comment: comment_attributes}
+
+      comment_url = "/articles/#{@article_id}/comments/#{Comment.last.id}"
+      get comment_url
+    end
+
+    it "returns success status to show a single article" do
+      expect(response).to have_http_status(200)
+    end 
+
+    it "returns the correct message for a single loaded comment" do
+      expect(response.body).to match(/Comentário carregado./)
+    end
+  end
+
   describe "POST /comments" do
     context "when it has all valid (optionals) parameters" do
       before(:each) do

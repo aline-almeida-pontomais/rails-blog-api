@@ -23,6 +23,28 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
+
+  describe "GET /articles/article" do
+    before(:each) do 
+      all_articles_url = "/articles"
+      article = build(:article)
+      article_attributes = FactoryBot.attributes_for(:article)
+
+      post all_articles_url, params: {article: article_attributes}
+
+      article_url = "/articles/#{Article.last.id}"
+      get article_url
+    end
+
+    it "returns success status to show a single loaded article" do
+      expect(response).to have_http_status(200)
+    end 
+
+    it "returns the correct message to show a single loaded article" do
+      expect(response.body).to match(/Artigo carregado./)
+    end
+  end
+
   describe "POST /articles" do
     context "when it has all valid parameters" do
       before(:each) do
@@ -89,6 +111,22 @@ RSpec.describe "Articles", type: :request do
       it 'returns the article updated' do
         json_response = JSON.parse(response.body)
         expect(@article.reload.updated_at).to_not be_nil
+      end
+    end
+
+    context 'when the article exists and has wrong or invalid parameters' do
+      before(:each) do
+        article = create(:article)
+        article_attributes = {title: "", body: "", status: ""}
+        put "/articles/#{Article.last.id}", params: {article: article_attributes} 
+      end
+
+      it 'returns the status code 422 - unprocessable_entity' do
+        expect(response).to have_http_status(422)
+      end
+
+      it "returns the correct message for not created article" do
+        expect(response.body).to match(/Não foi possível editar o artigo./)
       end
     end
 
