@@ -18,11 +18,7 @@ class ArticlesController < ApplicationController
       render json: {status: 'ERROR', message:'Não foi possível criar o artigo.', data:article.errors},status: :unprocessable_entity
     end
   end
-
-  def edit
-    article = Article.find(params[:id])
-  end
-
+  
   def update
     article = Article.find(params[:id])
     
